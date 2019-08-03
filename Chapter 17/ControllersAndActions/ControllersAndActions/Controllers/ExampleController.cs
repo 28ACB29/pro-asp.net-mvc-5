@@ -1,27 +1,32 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace ControllersAndActions.Controllers {
+namespace ControllersAndActions.Controllers
+{
 
-    public class ExampleController : Controller {
+	public class ExampleController : Controller
+	{
 
-        public ViewResult Index() {
+		public ViewResult Index()
+		{
 
-            ViewBag.Message = "Hello";
-            ViewBag.Date = DateTime.Now;
+			this.ViewBag.Message = "Hello";
+			this.ViewBag.Date = DateTime.Now;
 
-            return View();
-        }
+			return this.View();
+		}
 
-        public RedirectToRouteResult Redirect() {
-            return RedirectToAction("Index", "Basic");
-        }
+		public RedirectToRouteResult Redirect()
+		{
+			return this.RedirectToAction("Index", "Basic");
+		}
 
-        public HttpStatusCodeResult StatusCode() {
-            return new HttpUnauthorizedResult();
-        }
+		public HttpStatusCodeResult StatusCode()
+		{
+			return new HttpUnauthorizedResult();
+		}
 
 
 
-    }
+	}
 }

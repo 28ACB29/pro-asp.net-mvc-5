@@ -1,53 +1,72 @@
-﻿using System.Linq;
-using System.Web.Mvc;
-using SportsStore.Domain.Abstract;
+﻿using SportsStore.Domain.Abstract;
 using SportsStore.Domain.Entities;
 using SportsStore.WebUI.Models;
+using System.Linq;
+using System.Web.Mvc;
 
-namespace SportsStore.WebUI.Controllers {
+namespace SportsStore.WebUI.Controllers
+{
 
-    public class CartController : Controller {
-        private IProductRepository repository;
+	public class CartController : Controller
+	{
+		private IProductRepository repository;
 
-        public CartController(IProductRepository repo) {
-            repository = repo;
-        }
+		public CartController(IProductRepository repo)
+		{
+			this.repository = repo;
+		}
 
-        public ViewResult Index(string returnUrl) {
-            return View(new CartIndexViewModel {
-                Cart = GetCart(),
-                ReturnUrl = returnUrl
-            });
-        }
+		public ViewResult Index(string returnUrl)
+		{
+			return this.View(new CartIndexViewModel
+			{
+				Cart = this.GetCart(),
+				ReturnUrl = returnUrl
+			});
+		}
 
-        public RedirectToRouteResult AddToCart(int productId, string returnUrl) {
-            Product product = repository.Products
-                .FirstOrDefault(p => p.ProductID == productId);
+		public RedirectToRouteResult AddToCart(int productId, string returnUrl)
+		{
+			Product product = this.repository
+				.Products
+				.FirstOrDefault(p => p.ProductID == productId);
 
-            if (product != null) {
-                GetCart().AddItem(product, 1);
-            }
-            return RedirectToAction("Index", new { returnUrl });
-        }
+			if(product != null)
+			{
+				this.GetCart().AddItem(product, 1);
+			}
+			return this.RedirectToAction("Index", new
+			{
+				returnUrl
+			});
+		}
 
-        public RedirectToRouteResult RemoveFromCart(int productId, string returnUrl) {
-            Product product = repository.Products
-                .FirstOrDefault(p => p.ProductID == productId);
+		public RedirectToRouteResult RemoveFromCart(int productId, string returnUrl)
+		{
+			Product product = this.repository
+				.Products
+				.FirstOrDefault(p => p.ProductID == productId);
 
-            if (product != null) {
-                GetCart().RemoveLine(product);
-            }
-            return RedirectToAction("Index", new { returnUrl });
-        }
+			if(product != null)
+			{
+				this.GetCart().RemoveLine(product);
+			}
+			return this.RedirectToAction("Index", new
+			{
+				returnUrl
+			});
+		}
 
-        private Cart GetCart() {
+		private Cart GetCart()
+		{
 
-            Cart cart = (Cart)Session["Cart"];
-            if (cart == null) {
-                cart = new Cart();
-                Session["Cart"] = cart;
-            }
-            return cart;
-        }
-    }
+			Cart cart = (Cart) this.Session["Cart"];
+			if(cart == null)
+			{
+				cart = new Cart();
+				this.Session["Cart"] = cart;
+			}
+			return cart;
+		}
+	}
 }

@@ -1,26 +1,41 @@
-﻿using System.Web.Mvc;
-using HelperMethods.Models;
+﻿using HelperMethods.Models;
+using System.Web.Mvc;
 
-namespace HelperMethods.Controllers {
-    public class HomeController : Controller {
+namespace HelperMethods.Controllers
+{
+	public class HomeController : Controller
+	{
 
-        public ActionResult Index() {
+		public ActionResult Index()
+		{
 
-            ViewBag.Fruits = new string[] { "Apple", "Orange", "Pear" };
-            ViewBag.Cities = new string[] { "New York", "London", "Paris" };
+			this.ViewBag.Fruits = new string[]
+			{
+				"Apple",
+				"Orange",
+				"Pear"
+			};
+			this.ViewBag.Cities = new string[]
+			{
+				"New York",
+				"London",
+				"Paris"
+			};
 
-            string message = "This is an HTML element: <input>";
+			string message = "This is an HTML element: <input>";
 
-            return View((object)message);
-        }
+			return this.View((object) message);
+		}
 
-        public ActionResult CreatePerson() {
-            return View(new Person());
-        }
+		public ActionResult CreatePerson()
+		{
+			return this.View(new Person());
+		}
 
-        [HttpPost]
-        public ActionResult CreatePerson(Person person) {
-            return View(person);
-        }
-    }
+		[HttpPost]
+		public ActionResult CreatePerson(Person person)
+		{
+			return this.View(person);
+		}
+	}
 }

@@ -1,50 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using SportsStore.Domain.Abstract;
+﻿using SportsStore.Domain.Abstract;
 using SportsStore.Domain.Entities;
 using SportsStore.WebUI.Models;
+using System.Linq;
+using System.Web.Mvc;
 
-namespace SportsStore.WebUI.Controllers {
+namespace SportsStore.WebUI.Controllers
+{
 
-    public class ProductController : Controller {
-        private IProductRepository repository;
-        public int PageSize = 4;
+	public class ProductController : Controller
+	{
+		private IProductRepository repository;
+		public int PageSize = 4;
 
-        public ProductController(IProductRepository productRepository) {
-            this.repository = productRepository;
-        }
+		public ProductController(IProductRepository productRepository)
+		{
+			this.repository = productRepository;
+		}
 
-        public ViewResult List(string category, int page = 1) {
+		public ViewResult List(string category, int page = 1)
+		{
 
-            ProductsListViewModel viewModel = new ProductsListViewModel {
-                Products = repository.Products
-                    .Where(p => category == null || p.Category == category)
-                    .OrderBy(p => p.ProductID)
-                    .Skip((page - 1) * PageSize)
-                    .Take(PageSize),
-                PagingInfo = new PagingInfo {
-                    CurrentPage = page,
-                    ItemsPerPage = PageSize,
-                    TotalItems = category == null ?
-                        repository.Products.Count() :
-                        repository.Products.Where(e => e.Category == category).Count()
-                },
-                CurrentCategory = category
-            };
-            return View(viewModel);
-        }
+			ProductsListViewModel viewModel = new ProductsListViewModel
+			{
+				Products = this.repository.Products
+					.Where(p => category == null || p.Category == category)
+					.OrderBy(p => p.ProductID)
+					.Skip((page - 1) * this.PageSize)
+					.Take(this.PageSize),
+				PagingInfo = new PagingInfo
+				{
+					CurrentPage = page,
+					ItemsPerPage = PageSize,
+					TotalItems = category == null ? this.repository.Products.Count() : this.repository.Products.Where(e => e.Category == category).Count()
+				},
+				CurrentCategory = category
+			};
+			return this.View(viewModel);
+		}
 
-        public FileContentResult GetImage(int productId) {
-            Product prod = repository.Products
-                .FirstOrDefault(p => p.ProductID == productId);
-            if (prod != null) {
-                return File(prod.ImageData, prod.ImageMimeType);
-            } else {
-                return null;
-            }
-        }
-    }
+		public FileContentResult GetImage(int productId)
+		{
+			Product prod = this.repository.Products
+				.FirstOrDefault(p => p.ProductID == productId);
+			if(prod != null)
+			{
+				return this.File(prod.ImageData, prod.ImageMimeType);
+			}
+			else
+			{
+				return null;
+			}
+		}
+	}
 }

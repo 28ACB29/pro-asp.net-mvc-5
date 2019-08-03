@@ -1,12 +1,15 @@
 ﻿using System.Web.Mvc;
 
-namespace UrlsAndRoutes.AdditionalControllers {
-    public class HomeController : Controller {
+namespace UrlsAndRoutes.AdditionalControllers
+{
+	public class HomeController : Controller
+	{
 
-        public ActionResult Index() {
-            ViewBag.Controller = "Additional Controllers - Home";
-            ViewBag.Action = "Index";
-            return View("ActionName");
-        }
-    }
+		public ActionResult Index()
+		{
+			this.ViewBag.Controller = "Additional Controllers - Home";
+			this.ViewBag.Action = "Index";
+			return this.View("ActionName");
+		}
+	}
 }

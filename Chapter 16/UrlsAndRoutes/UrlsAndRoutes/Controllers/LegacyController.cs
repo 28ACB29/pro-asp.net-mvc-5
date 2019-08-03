@@ -1,11 +1,14 @@
 ﻿using System.Web.Mvc;
 
-namespace UrlsAndRoutes.Controllers {
+namespace UrlsAndRoutes.Controllers
+{
 
-    public class LegacyController : Controller {
+	public class LegacyController : Controller
+	{
 
-        public ActionResult GetLegacyURL(string legacyURL) {
-            return View((object)legacyURL);
-        }
-    }
+		public ActionResult GetLegacyURL(string legacyURL)
+		{
+			return this.View((object) legacyURL);
+		}
+	}
 }

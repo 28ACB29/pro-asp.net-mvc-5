@@ -1,9 +1,11 @@
 ﻿using SportsStore.Domain.Entities;
 
-namespace SportsStore.Domain.Abstract {
+namespace SportsStore.Domain.Abstract
+{
 
-    public interface IOrderProcessor {
+	public interface IOrderProcessor
+	{
 
-        void ProcessOrder(Cart cart, ShippingDetails shippingDetails);
-    }
+		void ProcessOrder(Cart cart, ShippingDetails shippingDetails);
+	}
 }

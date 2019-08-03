@@ -1,13 +1,20 @@
 ﻿using System.Web.Mvc;
 
-namespace ControllersAndActions.Infrastructure {
-    public class CustomRedirectResult : ActionResult {
+namespace ControllersAndActions.Infrastructure
+{
+	public class CustomRedirectResult : ActionResult
+	{
 
-        public string Url { get; set; }
+		public string Url
+		{
+			get;
+			set;
+		}
 
-        public override void ExecuteResult(ControllerContext context) {
-            string fullUrl = UrlHelper.GenerateContentUrl(Url, context.HttpContext);
-            context.HttpContext.Response.Redirect(fullUrl);
-        }
-    }
+		public override void ExecuteResult(ControllerContext context)
+		{
+			string fullUrl = UrlHelper.GenerateContentUrl(this.Url, context.HttpContext);
+			context.HttpContext.Response.Redirect(fullUrl);
+		}
+	}
 }

@@ -2,45 +2,52 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestingDemo.Tests {
+namespace TestingDemo.Tests
+{
 
-    [TestClass]
-    public class AdminControllerTests {
+	[TestClass]
+	public class AdminControllerTests
+	{
 
-        [TestMethod]
-        public void CanChangeLoginName() {
+		[TestMethod]
+		public void CanChangeLoginName()
+		{
 
-            // Arrange (set up a scenario) 
-            User user = new User() { LoginName = "Bob" };
-            FakeRepository repositoryParam = new FakeRepository();
-            repositoryParam.Add(user);
-            AdminController target = new AdminController(repositoryParam);
-            string oldLoginParam = user.LoginName;
-            string newLoginParam = "Joe";
+			// Arrange (set up a scenario) 
+			User user = new User() { LoginName = "Bob" };
+			FakeRepository repositoryParam = new FakeRepository();
+			repositoryParam.Add(user);
+			AdminController target = new AdminController(repositoryParam);
+			string oldLoginParam = user.LoginName;
+			string newLoginParam = "Joe";
 
-            // Act (attempt the operation) 
-            target.ChangeLoginName(oldLoginParam, newLoginParam);
+			// Act (attempt the operation) 
+			target.ChangeLoginName(oldLoginParam, newLoginParam);
 
-            // Assert (verify the result) 
-            Assert.AreEqual(newLoginParam, user.LoginName);
-            Assert.IsTrue(repositoryParam.DidSubmitChanges);
-        }
-    }
+			// Assert (verify the result) 
+			Assert.AreEqual(newLoginParam, user.LoginName);
+			Assert.IsTrue(repositoryParam.DidSubmitChanges);
+		}
+	}
 
-    class FakeRepository : IUserRepository {
-        public List<User> Users = new List<User>();
-        public bool DidSubmitChanges = false;
+	class FakeRepository : IUserRepository
+	{
+		public List<User> Users = new List<User>();
+		public bool DidSubmitChanges = false;
 
-        public void Add(User user) {
-            Users.Add(user);
-        }
+		public void Add(User user)
+		{
+			this.Users.Add(user);
+		}
 
-        public User FetchByLoginName(string loginName) {
-            return Users.First(m => m.LoginName == loginName);
-        }
+		public User FetchByLoginName(string loginName)
+		{
+			return this.Users.First(m => m.LoginName == loginName);
+		}
 
-        public void SubmitChanges() {
-            DidSubmitChanges = true;
-        }
-    }
+		public void SubmitChanges()
+		{
+			this.DidSubmitChanges = true;
+		}
+	}
 }

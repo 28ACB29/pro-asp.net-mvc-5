@@ -1,45 +1,57 @@
-﻿using System;
+﻿using Ninject;
+using SportsStore.Domain.Abstract;
+using SportsStore.Domain.Concrete;
+using SportsStore.WebUI.Infrastructure.Abstract;
+using SportsStore.WebUI.Infrastructure.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Web.Mvc;
-using Moq;
-using Ninject;
-using SportsStore.Domain.Abstract;
-using SportsStore.Domain.Concrete;
-using SportsStore.Domain.Entities;
-using SportsStore.WebUI.Infrastructure.Abstract;
-using SportsStore.WebUI.Infrastructure.Concrete;
 
-namespace SportsStore.WebUI.Infrastructure {
+namespace SportsStore.WebUI.Infrastructure
+{
 
-    public class NinjectDependencyResolver : IDependencyResolver {
-        private IKernel kernel;
+	public class NinjectDependencyResolver : IDependencyResolver
+	{
+		private IKernel kernel;
 
-        public NinjectDependencyResolver(IKernel kernelParam) {
-            kernel = kernelParam;
-            AddBindings();
-        }
+		public NinjectDependencyResolver(IKernel kernelParam)
+		{
+			this.kernel = kernelParam;
+			this.AddBindings();
+		}
 
-        public object GetService(Type serviceType) {
-            return kernel.TryGet(serviceType);
-        }
+		public object GetService(Type serviceType)
+		{
+			return this.kernel
+				.TryGet(serviceType);
+		}
 
-        public IEnumerable<object> GetServices(Type serviceType) {
-            return kernel.GetAll(serviceType);
-        }
+		public IEnumerable<object> GetServices(Type serviceType)
+		{
+			return this.kernel
+				.GetAll(serviceType);
+		}
 
-        private void AddBindings() {
-            kernel.Bind<IProductRepository>().To<EFProductRepository>();
+		private void AddBindings()
+		{
+			this.kernel
+				.Bind<IProductRepository>()
+				.To<EFProductRepository>();
 
-            EmailSettings emailSettings = new EmailSettings {
-                WriteAsFile = bool.Parse(ConfigurationManager
-                    .AppSettings["Email.WriteAsFile"] ?? "false")
-            };
+			EmailSettings emailSettings = new EmailSettings
+			{
+				WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
+			};
 
-            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
-                .WithConstructorArgument("settings", emailSettings);
+			this.kernel
+				.Bind<IOrderProcessor>()
+				.To<EmailOrderProcessor>()
+				.WithConstructorArgument("settings", emailSettings);
 
-            kernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
-        }
-    }
+			this.kernel
+				.Bind<IAuthProvider>()
+				.To<FormsAuthProvider>();
+		}
+	}
 }

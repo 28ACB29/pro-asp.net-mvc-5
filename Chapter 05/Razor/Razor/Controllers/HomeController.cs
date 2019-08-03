@@ -1,44 +1,68 @@
-﻿using System.Web.Mvc;
-using Razor.Models;
+﻿using Razor.Models;
+using System.Web.Mvc;
 
-namespace Razor.Controllers {
+namespace Razor.Controllers
+{
 
-    public class HomeController : Controller {
-        Product myProduct = new Product {
-            ProductID = 1,
-            Name = "Kayak",
-            Description = "A boat for one person",
-            Category = "Watersports",
-            Price = 275M
-        };
+	public class HomeController : Controller
+	{
+		private Product myProduct = new Product
+		{
+			ProductID = 1,
+			Name = "Kayak",
+			Description = "A boat for one person",
+			Category = "Watersports",
+			Price = 275M
+		};
 
-        public ActionResult Index() {
-            return View(myProduct);
-        }
+		public ActionResult Index()
+		{
+			return this.View(this.myProduct);
+		}
 
-        public ActionResult NameAndPrice() {
-            return View(myProduct);
-        }
+		public ActionResult NameAndPrice()
+		{
+			return this.View(this.myProduct);
+		}
 
-        public ActionResult DemoExpression() {
+		public ActionResult DemoExpression()
+		{
 
-            ViewBag.ProductCount = 1;
-            ViewBag.ExpressShip = true;
-            ViewBag.ApplyDiscount = false;
-            ViewBag.Supplier = null;
+			this.ViewBag.ProductCount = 1;
+			this.ViewBag.ExpressShip = true;
+			this.ViewBag.ApplyDiscount = false;
+			this.ViewBag.Supplier = null;
 
-            return View(myProduct);
-        }
+			return this.View(this.myProduct);
+		}
 
-        public ActionResult DemoArray() {
+		public ActionResult DemoArray()
+		{
 
-            Product[] array = {
-                new Product {Name = "Kayak", Price = 275M},
-                new Product {Name = "Lifejacket", Price = 48.95M},
-                new Product {Name = "Soccer ball", Price = 19.50M},
-                new Product {Name = "Corner flag", Price = 34.95M}
-            };
-            return View(array);
-        }
-    }
+			Product[] array =
+			{
+				new Product
+				{
+					Name = "Kayak",
+					Price = 275M
+				},
+				new Product
+				{
+					Name = "Lifejacket",
+					Price = 48.95M
+				},
+				new Product
+				{
+					Name = "Soccer ball",
+					Price = 19.50M
+				},
+				new Product
+				{
+					Name = "Corner flag",
+					Price = 34.95M
+				}
+			};
+			return this.View(array);
+		}
+	}
 }

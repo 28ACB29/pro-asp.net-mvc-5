@@ -1,19 +1,22 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace LanguageFeatures.Models {
+namespace LanguageFeatures.Models
+{
 
-    public class MyAsyncMethods {
+	public class MyAsyncMethods
+	{
 
-        public async static Task<long?> GetPageLength() {
+		public async static Task<long?> GetPageLength()
+		{
 
-            HttpClient client = new HttpClient();
+			HttpClient client = new HttpClient();
 
-            var httpMessage = await client.GetAsync("http://apress.com");
+			HttpResponseMessage httpMessage = await client.GetAsync("http://apress.com");
 
-            // we could do other things here while we are waiting 
-            // for the HTTP request to complete
-            return httpMessage.Content.Headers.ContentLength;
-        }
-    }
+			// we could do other things here while we are waiting 
+			// for the HTTP request to complete
+			return httpMessage.Content.Headers.ContentLength;
+		}
+	}
 }

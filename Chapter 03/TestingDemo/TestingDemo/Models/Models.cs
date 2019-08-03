@@ -1,28 +1,42 @@
-﻿namespace TestingDemo {
+﻿namespace TestingDemo
+{
 
-    public class User {
-        public string LoginName { get; set; }
-    }
+	public class User
+	{
+		public string LoginName
+		{
+			get;
+			set;
+		}
+	}
 
-    public interface IUserRepository {
-        void Add(User newUser);
-        User FetchByLoginName(string loginName);
-        void SubmitChanges();
-    }
+	public interface IUserRepository
+	{
+		void Add(User newUser);
+		User FetchByLoginName(string loginName);
+		void SubmitChanges();
+	}
 
-    public class DefaultUserRepository : IUserRepository {
+	public class DefaultUserRepository : IUserRepository
+	{
 
-        public void Add(User newUser) {
-            // implement me
-        }
+		public void Add(User newUser)
+		{
+			// implement me
+		}
 
-        public User FetchByLoginName(string loginName) {
-            // implement me
-            return new User() { LoginName = loginName };
-        }
+		public User FetchByLoginName(string loginName)
+		{
+			// implement me
+			return new User()
+			{
+				LoginName = loginName
+			};
+		}
 
-        public void SubmitChanges() {
-            // implement me
-        }
-    }
+		public void SubmitChanges()
+		{
+			// implement me
+		}
+	}
 }

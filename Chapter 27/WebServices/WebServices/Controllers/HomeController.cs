@@ -1,12 +1,14 @@
 ﻿using System.Web.Mvc;
-using WebServices.Models;
 
-namespace WebServices.Controllers {
+namespace WebServices.Controllers
+{
 
-    public class HomeController : Controller {
+	public class HomeController : Controller
+	{
 
-        public ViewResult Index() {
-            return View();
-        }
-    }
+		public ViewResult Index()
+		{
+			return this.View();
+		}
+	}
 }

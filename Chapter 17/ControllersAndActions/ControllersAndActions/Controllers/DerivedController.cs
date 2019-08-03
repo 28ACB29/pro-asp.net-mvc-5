@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using ControllersAndActions.Infrastructure;
+﻿using System.Web.Mvc;
 
-namespace ControllersAndActions.Controllers {
-    public class DerivedController : Controller {
+namespace ControllersAndActions.Controllers
+{
+	public class DerivedController : Controller
+	{
 
-        public ActionResult Index() {
-            ViewBag.Message = "Hello from the DerivedController Index method";
-            return View("MyView");
-        }
+		public ActionResult Index()
+		{
+			this.ViewBag.Message = "Hello from the DerivedController Index method";
+			return this.View("MyView");
+		}
 
-        public ActionResult ProduceOutput() {
-            return Redirect("/Basic/Index");
-        } 
+		public ActionResult ProduceOutput()
+		{
+			return this.Redirect("/Basic/Index");
+		}
 
 
-    }
+	}
 }
